@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/a-silly-little-game/static/css/main.40b52b94.css",
-    "main.js": "/a-silly-little-game/static/js/main.0f4f1c9a.js",
+    "main.js": "/a-silly-little-game/static/js/main.3798a3de.js",
     "static/js/787.586603be.chunk.js": "/a-silly-little-game/static/js/787.586603be.chunk.js",
     "static/media/indie-flower-all-400-normal.woff": "/a-silly-little-game/static/media/indie-flower-all-400-normal.f14e460dee7dc2685749.woff",
     "static/media/indie-flower-latin-400-normal.woff2": "/a-silly-little-game/static/media/indie-flower-latin-400-normal.8dfdf79ce07c601ab41c.woff2",
     "index.html": "/a-silly-little-game/index.html",
     "main.40b52b94.css.map": "/a-silly-little-game/static/css/main.40b52b94.css.map",
-    "main.0f4f1c9a.js.map": "/a-silly-little-game/static/js/main.0f4f1c9a.js.map",
+    "main.3798a3de.js.map": "/a-silly-little-game/static/js/main.3798a3de.js.map",
     "787.586603be.chunk.js.map": "/a-silly-little-game/static/js/787.586603be.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.40b52b94.css",
-    "static/js/main.0f4f1c9a.js"
+    "static/js/main.3798a3de.js"
   ]
 }
