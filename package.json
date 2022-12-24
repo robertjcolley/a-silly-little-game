@@ -2,7 +2,7 @@
   "name": "a-silly-little-game",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://robertjcolley.github.io/a-silly-little-game",
+  "homepage": "https://asillylittlegame.com",
   "dependencies": {
     "@fontsource/indie-flower": "^4.5.10",
     "@testing-library/jest-dom": "^5.16.5",
