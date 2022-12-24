@@ -152,7 +152,7 @@ export default function Game() {
         <div className="GameOver">
           <div className="GameOver-Inner">
             <img
-              src={"%PUBLIC_URL%/images/" + correctAnswer}
+              src={process.env.PUBLIC_URL + "/images/" + correctAnswer}
               alt={ITEMS[landingIndex]}
               style={{
                 height: 100,
@@ -197,7 +197,7 @@ export default function Game() {
         <div className="Instructions">
           <div className="Instructions-Inner">
             <img
-              src={"%PUBLIC_URL%/images/" + ITEMS[landingIndex]}
+              src={process.env.PUBLIC_URL + "/images/" + ITEMS[landingIndex]}
               alt={ITEMS[landingIndex]}
               style={{
                 height: 100,
@@ -218,6 +218,9 @@ export default function Game() {
             <button onClick={handleClickStart} style={{ marginBottom: "1rem" }}>
               Start
             </button>
+            <p>
+              Made by <a href="https://www.kenney.nl/">Robert Colley</a>
+            </p>
             <a href="https://www.kenney.nl/">
               Thanks to kenny.nl for the assets!
             </a>
@@ -228,7 +231,7 @@ export default function Game() {
       <div id="Top">
         {topLetters.map((item, index) => (
           <img
-            src={"%PUBLIC_URL%/images/" + item}
+            src={process.env.PUBLIC_URL + "/images/" + item}
             key={item + "-top"}
             alt={item}
             style={{
@@ -244,7 +247,7 @@ export default function Game() {
       <div id="Bottom">
         {bottomLetters.map((item, index) => (
           <img
-            src={"%PUBLIC_URL%/images/" + item}
+            src={process.env.PUBLIC_URL + "/images/" + item}
             key={item + "-bottom"}
             alt={item}
             style={{
