@@ -152,7 +152,7 @@ export default function Game() {
         <div className="GameOver">
           <div className="GameOver-Inner">
             <img
-              src={"/images/" + correctAnswer}
+              src={"%PUBLIC_URL%/images/" + correctAnswer}
               alt={ITEMS[landingIndex]}
               style={{
                 height: 100,
@@ -197,7 +197,7 @@ export default function Game() {
         <div className="Instructions">
           <div className="Instructions-Inner">
             <img
-              src={"/images/" + ITEMS[landingIndex]}
+              src={"%PUBLIC_URL%/images/" + ITEMS[landingIndex]}
               alt={ITEMS[landingIndex]}
               style={{
                 height: 100,
@@ -228,7 +228,7 @@ export default function Game() {
       <div id="Top">
         {topLetters.map((item, index) => (
           <img
-            src={"/images/" + item}
+            src={"%PUBLIC_URL%/images/" + item}
             key={item + "-top"}
             alt={item}
             style={{
@@ -244,7 +244,7 @@ export default function Game() {
       <div id="Bottom">
         {bottomLetters.map((item, index) => (
           <img
-            src={"/images/" + item}
+            src={"%PUBLIC_URL%/images/" + item}
             key={item + "-bottom"}
             alt={item}
             style={{
