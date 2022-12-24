@@ -23,17 +23,6 @@
   right: 0;
 }
 
-.Instructions-Backdrop {
-  z-index: 1;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: black;
-  opacity: 0.5;
-}
-
 .Instructions-Inner {
   z-index: 5;
   border: 1rem solid #528cdb;
@@ -58,7 +47,7 @@
   right: 0;
 }
 
-.GameOver-Backdrop {
+.Backdrop {
   z-index: 1;
   position: absolute;
   top: 0;
@@ -117,4 +106,32 @@ button {
 .Leaderboard {
   background-color: white;
   padding: 2rem;
+}
+
+.HowToPlay {
+  background-color: white;
+  display: flex;
+  padding: 2rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.HowToPlay-Inner {
+  z-index: 5;
+  padding: 1rem;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.HowToPlayImage {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
 }

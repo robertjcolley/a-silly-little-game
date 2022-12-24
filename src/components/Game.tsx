@@ -57,6 +57,7 @@ export default function Game() {
   const [landingIndex] = React.useState(
     Math.floor(getRandomArbitrary(0, ITEMS.length))
   );
+  const [howToPlayShowing, setHowToPlayShowing] = React.useState(false);
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [gameOver, setGameOver] = React.useState(false);
   const [startTimeStamp, setStartTimeStamp] = React.useState(0);
@@ -146,9 +147,43 @@ export default function Game() {
     });
   };
 
+  const handleClickHowToPlay = () => {
+    setHowToPlayShowing(true);
+  };
+
+  const handleClickCloseHowToPlay = () => {
+    setHowToPlayShowing(false);
+  };
+
   return (
     <div className="Game">
-      {gameOver ? (
+      {bestScoreStorage === null || howToPlayShowing ? (
+        <div className="HowToPlay">
+          <div className="HowToPlay-Inner">
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                marginTop: "1rem",
+                width: "100%",
+              }}
+            >
+              <button
+                onClick={handleClickCloseHowToPlay}
+                style={{ marginBottom: "1rem" }}
+              >
+                Close
+              </button>
+            </div>
+            <img
+              src={process.env.PUBLIC_URL + "/how-to.png"}
+              className="HowToPlayImage"
+              alt="How to play"
+            />
+          </div>
+          <div className="Backdrop" />
+        </div>
+      ) : gameOver ? (
         <div className="GameOver">
           <div className="GameOver-Inner">
             <img
@@ -191,7 +226,7 @@ export default function Game() {
               </button>
             </div>
           </div>
-          <div className="GameOver-Backdrop" />
+          <div className="Backdrop" />
         </div>
       ) : !isPlaying ? (
         <div className="Instructions">
@@ -215,9 +250,29 @@ export default function Game() {
                 </span>
               )}
             </p>
-            <button onClick={handleClickStart} style={{ marginBottom: "1rem" }}>
-              Start
-            </button>
+            <div
+              style={{
+                display: "flex",
+                width: "100%",
+                justifyContent: "space-evenly",
+              }}
+            >
+              <button
+                onClick={handleClickHowToPlay}
+                style={{
+                  marginBottom: "1rem",
+                  backgroundColor: "#ffcc00",
+                }}
+              >
+                How to play
+              </button>
+              <button
+                onClick={handleClickStart}
+                style={{ marginBottom: "1rem" }}
+              >
+                Start
+              </button>
+            </div>
             <p>
               Made by <a href="https://www.kenney.nl/">Robert Colley</a>
             </p>
