@@ -250,7 +250,7 @@ export default function Game() {
                   backgroundColor: name === "" ? "lightgray" : "#ffcc00",
                 }}
               >
-                Submit Score
+                Try again
               </button>
               <button
                 onClick={handleClickShare}
