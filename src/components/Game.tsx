@@ -254,7 +254,7 @@ export default function Game() {
               </button>
               <button
                 onClick={handleClickShare}
-                style={{ marginBottom: "1rem" }}
+                style={{ marginBottom: "1rem", color: "white" }}
               >
                 Share
               </button>
