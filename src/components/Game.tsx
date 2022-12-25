@@ -1,4 +1,10 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import {
+  getLeaderboard,
+  logAnalyticsEvent,
+  postScore,
+} from "../config/firebase";
 import {
   generateCoordinates,
   getRandomArbitrary,
@@ -71,7 +77,14 @@ export default function Game() {
     { x: number; y: number }[]
   >([]);
   const [correctAnswer, setCorrectAnswer] = React.useState<string>();
+  const [name, setName] = React.useState<string>(
+    localStorage.getItem("name") ?? ""
+  );
   const bestScoreStorage = localStorage.getItem("bestScore");
+  const query = useQuery({
+    queryKey: ["leaderboard"],
+    queryFn: getLeaderboard,
+  });
 
   const handleClickStart = () => {
     const randomIndex = Math.floor(Math.random() * ITEMS.length);
@@ -117,6 +130,7 @@ export default function Game() {
     setCorrectAnswer(newCorreectLetter);
     setStartTimeStamp(Date.now());
     setIsPlaying(true);
+    logAnalyticsEvent("level_start");
   };
 
   const handleClickPiece = (index: string) => {
@@ -130,17 +144,29 @@ export default function Game() {
         localStorage.setItem("bestScore", newScore.toString());
       }
 
+      logAnalyticsEvent("level_end", { value: newScore, sucess: true });
       setEndTimeStamp(newEndTimestamp);
       setIsPlaying(false);
       setGameOver(true);
     }
   };
 
+  const handleChangeName = (e: React.ChangeEvent<HTMLInputElement> | null) => {
+    setName(e?.target.value as string);
+  };
+
   const handleClickSubmitScore = () => {
+    logAnalyticsEvent("post_score", {
+      score: endTimeStamp - startTimeStamp,
+      name,
+    });
+    localStorage.setItem("name", name);
+    postScore(name, endTimeStamp - startTimeStamp);
     setGameOver(false);
   };
 
   const handleClickShare = () => {
+    logAnalyticsEvent("share");
     navigator.share({
       url: "https://asillylittlegame.com",
       text: `I got ${endTimeStamp - startTimeStamp} ms. Can you beat my time?`,
@@ -148,10 +174,12 @@ export default function Game() {
   };
 
   const handleClickHowToPlay = () => {
+    logAnalyticsEvent("tutorial_begin");
     setHowToPlayShowing(true);
   };
 
   const handleClickCloseHowToPlay = () => {
+    logAnalyticsEvent("tutorial_complete");
     setHowToPlayShowing(false);
   };
 
@@ -195,8 +223,13 @@ export default function Game() {
               }}
             />
             <h1>A Silly Little Game</h1>
-            {/* <h2>Submit your score to the Leaderboard</h2>
-            <input placeholder="Your name..." type={"text"} /> */}
+            <h2>Submit your score to the Leaderboard</h2>
+            <input
+              placeholder="Your name..."
+              type={"text"}
+              value={name}
+              onChange={handleChangeName}
+            />
             <p>
               Your time: <b>{endTimeStamp - startTimeStamp} ms</b>
               <br />
@@ -211,12 +244,13 @@ export default function Game() {
             >
               <button
                 onClick={handleClickSubmitScore}
+                disabled={name === ""}
                 style={{
                   marginBottom: "1rem",
-                  backgroundColor: "#ffcc00",
+                  backgroundColor: name === "" ? "lightgray" : "#ffcc00",
                 }}
               >
-                Restart
+                Submit Score
               </button>
               <button
                 onClick={handleClickShare}
@@ -240,6 +274,16 @@ export default function Game() {
               }}
             />
             <h1>A Silly Little Game</h1>
+            <span>
+              <b>Top Scores</b>
+            </span>
+            <ul>
+              {query.data?.map((item, index) => (
+                <li key={index}>
+                  <b>{item.score} ms</b>: {item.name}
+                </li>
+              ))}
+            </ul>
             <p>
               Choose the only image on the bottom that is also in the top.
               Fastest time wins!
