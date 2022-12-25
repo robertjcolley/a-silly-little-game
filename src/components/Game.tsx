@@ -168,7 +168,7 @@ export default function Game() {
   const handleClickShare = () => {
     logAnalyticsEvent("share");
     navigator.share({
-      url: "https://asillylittlegame.com",
+      url: "https://www.asillylittlegame.com",
       text: `I got ${endTimeStamp - startTimeStamp} ms. Can you beat my time?`,
     });
   };
@@ -185,7 +185,7 @@ export default function Game() {
 
   return (
     <div className="Game">
-      {bestScoreStorage === null || howToPlayShowing ? (
+      {howToPlayShowing ? (
         <div className="HowToPlay">
           <div className="HowToPlay-Inner">
             <div
