@@ -55,7 +55,6 @@ export async function getLeaderboard() {
   const docs = await getDocs(topScoresQuery);
   const toReturn: LeaderboardEntry[] = [];
   docs.forEach((item) => {
-    console.log(item.data());
     toReturn.push(item.data() as LeaderboardEntry);
   });
   return toReturn;
