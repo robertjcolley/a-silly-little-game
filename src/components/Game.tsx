@@ -324,7 +324,7 @@ export default function Game() {
               Thanks to kenny.nl for the assets!
             </a>
           </div>
-          <div className="Instructions-Backdrop" />
+          <div className="Backdrop" />
         </div>
       ) : null}
       <div id="Top">
