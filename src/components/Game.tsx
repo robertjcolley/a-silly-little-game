@@ -254,7 +254,7 @@ export default function Game() {
               </button>
               <button
                 onClick={handleClickShare}
-                style={{ marginBottom: "1rem", color: "white" }}
+                style={{ marginBottom: "1rem" }}
               >
                 Share
               </button>
@@ -312,7 +312,7 @@ export default function Game() {
               </button>
               <button
                 onClick={handleClickStart}
-                style={{ marginBottom: "1rem", backgroundColor: "purple" }}
+                style={{ marginBottom: "1rem" }}
               >
                 Start
               </button>
