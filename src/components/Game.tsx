@@ -312,13 +312,13 @@ export default function Game() {
               </button>
               <button
                 onClick={handleClickStart}
-                style={{ marginBottom: "1rem" }}
+                style={{ marginBottom: "1rem", backgroundColor: "purple" }}
               >
                 Start
               </button>
             </div>
             <p>
-              Made by <a href="https://www.kenney.nl/">Robert Colley</a>
+              Made by <a href="https://robertjcolley.com">Robert Colley</a>
             </p>
             <a href="https://www.kenney.nl/">
               Thanks to kenny.nl for the assets!
