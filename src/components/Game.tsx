@@ -69,6 +69,7 @@ export default function Game() {
   const [startTimeStamp, setStartTimeStamp] = React.useState(0);
   const [endTimeStamp, setEndTimeStamp] = React.useState(0);
   const [topLetters, setTopLetters] = React.useState<string[]>([]);
+  const [remaining, setRemaining] = React.useState(2);
   const [topCoordinates, setTopCoordinates] = React.useState<
     { x: number; y: number }[]
   >([]);
@@ -86,7 +87,7 @@ export default function Game() {
     queryFn: getLeaderboard,
   });
 
-  const handleClickStart = () => {
+  const createBoard = () => {
     const randomIndex = Math.floor(Math.random() * ITEMS.length);
     const newCorreectLetter = ITEMS[randomIndex];
     const remainingLetters = ITEMS.filter((item) => item !== newCorreectLetter);
@@ -128,6 +129,11 @@ export default function Game() {
       generateCoordinates(bottomContainer, newBottomLetters.length, IMAGE_SIZE)
     );
     setCorrectAnswer(newCorreectLetter);
+  };
+
+  const handleClickStart = () => {
+    createBoard();
+    setRemaining(2);
     setStartTimeStamp(Date.now());
     setIsPlaying(true);
     logAnalyticsEvent("level_start");
@@ -135,19 +141,28 @@ export default function Game() {
 
   const handleClickPiece = (index: string) => {
     if (index === correctAnswer) {
-      const newEndTimestamp = Date.now();
-      const newScore = newEndTimestamp - startTimeStamp;
-      const bestScore = localStorage.getItem("bestScore");
-      if (!bestScore) {
-        localStorage.setItem("bestScore", newScore.toString());
-      } else if (newScore < parseInt(bestScore)) {
-        localStorage.setItem("bestScore", newScore.toString());
-      }
+      if (remaining <= 0) {
+        const newEndTimestamp = Date.now();
+        const newScore = newEndTimestamp - startTimeStamp;
+        const bestScore = localStorage.getItem("bestScore");
+        if (!bestScore) {
+          localStorage.setItem("bestScore", newScore.toString());
+        } else if (newScore < parseInt(bestScore)) {
+          localStorage.setItem("bestScore", newScore.toString());
+        }
 
-      logAnalyticsEvent("level_end", { value: newScore, sucess: true });
-      setEndTimeStamp(newEndTimestamp);
-      setIsPlaying(false);
-      setGameOver(true);
+        logAnalyticsEvent("level_end", {
+          value: newScore,
+          sucess: true,
+          remaining,
+        });
+        setEndTimeStamp(newEndTimestamp);
+        setIsPlaying(false);
+        setGameOver(true);
+      } else {
+        createBoard();
+        setRemaining((cur) => cur - 1);
+      }
     }
   };
 
