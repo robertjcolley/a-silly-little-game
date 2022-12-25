@@ -12,7 +12,7 @@ export function generateCoordinates(
   const coordinates: Point[] = [];
   let loops = 0;
   while (coordinates.length < numberOfCoordinates) {
-    if (loops > 100) throw new Error("Logic issue");
+    if (loops > 10000) throw new Error("Logic issue");
 
     const newRandomX = getRandomArbitrary(xRange.min, xRange.max);
     const newRandomY = getRandomArbitrary(yRange.min, yRange.max);

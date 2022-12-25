@@ -74,5 +74,6 @@ export function logAnalyticsEvent(
     | undefined,
   options?: AnalyticsCallOptions | undefined
 ) {
+  if (process.env.NODE_ENV === "development") return;
   logEvent(analytics, eventName, eventParams, options);
 }

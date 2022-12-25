@@ -43,7 +43,7 @@ const ITEMS = [
   //   "zebra.png",
 ];
 
-const IMAGE_SIZE = 50;
+const IMAGE_SIZE = 44;
 
 function getShuffledArray(arr: string[]) {
   var shuffled = arr.slice(0),
