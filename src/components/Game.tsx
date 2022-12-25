@@ -158,10 +158,10 @@ export default function Game() {
   const handleClickSubmitScore = () => {
     logAnalyticsEvent("post_score", {
       score: endTimeStamp - startTimeStamp,
-      name,
+      name: name.substring(0, 24),
     });
-    localStorage.setItem("name", name);
-    postScore(name, endTimeStamp - startTimeStamp);
+    localStorage.setItem("name", name.substring(0, 24));
+    postScore(name.substring(0, 24), endTimeStamp - startTimeStamp);
     setGameOver(false);
   };
 
