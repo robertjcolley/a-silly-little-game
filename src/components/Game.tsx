@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   getLeaderboard,
   logAnalyticsEvent,
@@ -9,6 +9,11 @@ import {
   generateCoordinates,
   getRandomArbitrary,
 } from "../utils/generateCoordinates";
+import {
+  FacebookShareButton,
+  RedditShareButton,
+  TwitterShareButton,
+} from "react-share";
 
 const ITEMS = [
   "bear.png",
@@ -198,6 +203,11 @@ export default function Game() {
     setHowToPlayShowing(false);
   };
 
+  const handleBeforeOnClick = (shareName: string) => {
+    logAnalyticsEvent("share", { destination: shareName });
+    logAnalyticsEvent("share_" + shareName);
+  };
+
   return (
     <div className="Game">
       {howToPlayShowing ? (
@@ -255,6 +265,8 @@ export default function Game() {
                 display: "flex",
                 width: "100%",
                 justifyContent: "space-evenly",
+                flexWrap: "wrap",
+                alignItems: "center",
               }}
             >
               <button
@@ -267,12 +279,59 @@ export default function Game() {
               >
                 Try again
               </button>
-              <button
+              <div>Challenge your friends on...</div>
+              <FacebookShareButton
+                quote="Can you beat my time? | A Silly Little Game"
+                url="https://asillylittlegame.com"
+                beforeOnClick={() => handleBeforeOnClick("facebook")}
+              >
+                <button
+                  style={{
+                    backgroundColor: "#1877F2",
+                    color: "white",
+                    marginRight: "1rem",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  Facebook
+                </button>
+              </FacebookShareButton>
+
+              <TwitterShareButton
+                url="https://asillylittlegame.com"
+                beforeOnClick={() => handleBeforeOnClick("twitter")}
+              >
+                <button
+                  style={{
+                    backgroundColor: "#1DA1F2",
+                    color: "white",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  Twitter
+                </button>
+              </TwitterShareButton>
+              <RedditShareButton
+                url="https://asillylittlegame.com"
+                beforeOnClick={() => handleBeforeOnClick("reddit")}
+              >
+                <button
+                  style={{
+                    backgroundColor: "#FF5700",
+                    color: "white",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  Reddit
+                </button>
+              </RedditShareButton>
+
+              {/* <button
                 onClick={handleClickShare}
                 style={{ marginBottom: "1rem" }}
               >
                 Share
-              </button>
+              </button> */}
             </div>
           </div>
           <div className="Backdrop" />
@@ -332,9 +391,62 @@ export default function Game() {
                 Start
               </button>
             </div>
-            <p>
-              Made by <a href="https://robertjcolley.com">Robert Colley</a>
-            </p>
+            <div>Challenge your friends on...</div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexWrap: "wrap",
+              }}
+            >
+              <FacebookShareButton
+                quote="Can you beat my time? | A Silly Little Game"
+                url="https://asillylittlegame.com"
+                beforeOnClick={() => handleBeforeOnClick("facebook")}
+              >
+                <button
+                  style={{
+                    backgroundColor: "#1877F2",
+                    color: "white",
+                    marginRight: "1rem",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  Facebook
+                </button>
+              </FacebookShareButton>
+
+              <TwitterShareButton
+                url="https://asillylittlegame.com"
+                beforeOnClick={() => handleBeforeOnClick("twitter")}
+              >
+                <button
+                  style={{
+                    backgroundColor: "#1DA1F2",
+                    color: "white",
+                    marginRight: "1rem",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  Twitter
+                </button>
+              </TwitterShareButton>
+              <RedditShareButton
+                url="https://asillylittlegame.com"
+                beforeOnClick={() => handleBeforeOnClick("reddit")}
+              >
+                <button
+                  style={{
+                    backgroundColor: "#FF5700",
+                    color: "white",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  Reddit
+                </button>
+              </RedditShareButton>
+            </div>
             <a href="https://www.kenney.nl/">
               Thanks to kenny.nl for the assets!
             </a>
